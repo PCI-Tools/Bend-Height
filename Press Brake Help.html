@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple Formed Height</title>
+	<link rel="icon" type="image/x-icon" href="PB APP ICON.ico">
+	<link rel="manifest" href="manifest.json">
+	<style>
+		html{
+			height: 100vh;
+			background: linear-gradient(to top, rgb(122,131,131), rgb(85, 128, 147));
+		}
+    body{
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #heightCalculator {
+      display: flex;
+      flex-direction: column;
+      width: 50vw;
+      border: 5px solid black;
+      border-radius: 10px;
+	  background: rgb(235 235 235 / 68%);
+      justify-content: center;
+      align-items: center;
+    }
+		h1{
+			color: rgb(0, 0, 0);
+			font-size: clamp(15px, 5vw, 25px);
+			text-decoration: underline;
+			text-align: center;
+			text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.6),
+				     -2px -2px 2px rgba(255, 255, 255, 0.6),
+				     2px -2px 2px rgba(255, 255, 255, 0.6),
+				     -2px 2px 2px rgba(255, 255, 255, 0.6);
+	
+		}
+		h2{
+			color: rgb(255, 115, 0);
+			text-align: center;
+			text-decoration: underline;
+			font-size: clamp(15px, 3vw, 25px);
+		}
+		form{
+			color: rgb(0, 0, 0);
+			font-size: clamp(10px, 1.5vw, 15px);
+      text-align: right;
+		}
+    input{
+      background-color: rgba(0, 0, 0, 0%);
+      border: 2px solid black;
+    }
+		h3{
+			color: rgb(255,115,0);
+			font-size: 1.25em;
+			text-decoration: underline;
+		}
+		p{
+			color: #00ffde;
+			font-size: 1em;
+		}
+		button{
+			color: black;
+			background-color: rgba(0, 0, 0, 0%);
+			font-size: clamp(10px, 1.5vw, 15px);
+			border-style: outset;
+			border-color: white;
+			border-width: 4px;
+      		margin-top: 10px;
+			transition: all .3s ease-in-out;
+		}
+		button:hover{
+			border-style: inset;
+			background-color: rgba(0, 0, 0, 100%);
+      color: white;
+		}
+.image {
+  width: 100%;            /* container width (adjust as needed) */
+  margin: 20px auto;     /* center horizontally with space */
+  margin-bottom: 0;
+}
+
+.image img {
+  width: 100%;           /* fill container width */
+  height: auto;          /* maintain aspect ratio */
+  display: block;        /* removes small inline gaps */
+}
+		#results{
+			background-color: rgba(0,0,0,.95);
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			margin: 2.5vw;
+			border-radius: 20px;
+			width: 30vw;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		@media (max-width: 600px) {
+    form {
+        font-size: 18px; /* Adjust font size on small screens */
+    }
+
+    #results {
+        width: 90vw; /* Make the results container more responsive */
+        margin: 3vw;
+    }
+}		
+	</style>
+</head>
+<body>
+  <div id="heightCalculator">
+	<h1>Bend Height Calculator</h1>
+		<form>
+			<label for="thickness">Material Thickness:</label>
+			<input type="number" value="" id="thickness">
+			<br>
+			<br>
+			<label for="sod">SOD:</label>
+			<input type="number" value="" id="sod">
+			<br>
+			<br>
+			<label for="bendAngle">Bend Angle:</label>
+			<input type="number" value="" id="bendAngle">
+			<br>
+		</form>
+    			<button type="button" class="button-17" onclick="bendHeightFunction()">Calculate</button>
+		<div id="image" class="image">
+		<img src="ANGLES.png">
+	</div>	
+	</div>			
+	<div id="results"></div>
+
+	
+	<script>
+		function bendHeightFunction() {
+			//Pass all the values from inputs into variables to work with
+			const thickness = parseFloat(document.getElementById("thickness").value);
+			const sod = parseFloat(document.getElementById("sod").value);
+			//Convert bend angle from degrees to radians
+			const bendAngle = (parseFloat(document.getElementById("bendAngle").value))*(Math.PI/180);
+			let height;
+
+			
+			
+			//Displays values for trouble shooting
+			console.log("Material Thickness:", thickness, "SOD:", sod, "Bend Angle:", bendAngle)
+		
+			//Equation for calculating the height normal to the bend
+			if (bendAngle<=(Math.PI/2)) {
+			  height = (sod*Math.sin(bendAngle))+(thickness*Math.cos(bendAngle));
+			} else {
+			  height = sod*Math.cos(Math.PI - bendAngle)
+			}
+
+			
+			const resultsDiv = document.getElementById("results");
+			resultsDiv.innerHTML = `
+				<h2>Simple Formed Height</h2>
+				<p>${height.toFixed(3)} in.</p>
+			`;
+			}
+	</script>
+</body>
+</html>
