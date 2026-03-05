@@ -70,11 +70,13 @@
       		margin-top: 10px;
 			transition: all .3s ease-in-out;
 		}
+		@media (hover: hover){
 		button:hover{
 			border-style: inset;
 			background-color: rgba(0, 0, 0, 100%);
       		color: white;
 		}
+	}
 .image {
   width: 100%;            /* container width (adjust as needed) */
   margin: 20px auto;     /* center horizontally with space */
@@ -102,6 +104,10 @@
     form {
         font-size: 25px; /* Adjust font size on small screens */
     }
+	input {
+		font-size: 20px;
+		width: 30vw;
+	}
 	h1 {
 		font-size: 30px;
 	}
@@ -120,7 +126,7 @@
 		border-style: none;
 
 	}
-			button:hover{
+	button:active{
 			background-color: rgba(0, 0, 0, 100%);
 			border-style: none;
       		color: white;
